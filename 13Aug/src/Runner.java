@@ -1,4 +1,4 @@
-public class runner {
+public class Runner {
     public static void main(String[] args) {
         Account myAccount =new Account();
         System.out.println(myAccount.getBalance());

@@ -55,7 +55,7 @@ public class Account {
         String message = "";
         if (depositAmount > 0) {
             balance = balance + depositAmount;
-            recordTransaction(depositAmount, "Debited");
+            recordTransaction(depositAmount, "Debited to");
             message = "Amount " + depositAmount + "deposited";
         }
         else
@@ -72,13 +72,13 @@ public class Account {
         if (withdrawAmount < balance) {
             balance = balance - withdrawAmount;
             noOfWithdrawls++;
-            recordTransaction(withdrawAmount, "Credited");
-            message="Withdrew Amount " + withdrawAmount ;
+            recordTransaction(withdrawAmount, "Credited from");
+            message = "Withdrew Amount " + withdrawAmount ;
             if (noOfWithdrawls > 3) {
                 double fee = (withdrawAmount * 0.005);
                 balance = balance - fee;
-                recordTransaction(withdrawAmount, "Withdrawal Fee");
-                message+= " & charged fee of " +fee;
+                recordTransaction(fee, "Withdrawal Fee credited from");
+                message += " & charged fee of " +fee;
             }
         }
 //        if (withdrawAmount<0)
@@ -95,13 +95,18 @@ public class Account {
 
 
 
-    public void recordTransaction(double depositAmount,String operation)
+    public void recordTransaction(double depositAmount, String operation)
     {
-        transactions.add("Amoutn of Rs " + depositAmount + " "+ operation + " from your account at "+ new Date());
+        transactions.add("Amoutn of Rs " + depositAmount + " "+ operation + "  your account at "+ new Date());
 
     }
     public void showAllTransactions()
     {
-        System.out.println(transactions.toString());
+        System.out.println("*********** Transaction Record As Below **********");
+        for (String e:transactions
+             ) {
+            System.out.println(e);
+
+        };
     }
 }
